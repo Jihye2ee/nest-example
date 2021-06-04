@@ -1,10 +1,10 @@
 import { User } from ".prisma/client";
 import { Prisma } from ".prisma/client";
 import { Injectable } from "@nestjs/common";
-import { PrismaService } from "./prisma.service";
+import { PrismaService } from "../../service/prisma.service";
 
 @Injectable()
-export class UserServie {
+export class UserService {
     constructor(private prisma: PrismaService) {}
 
     async user(userWhereUniqueInput: Prisma.UserWhereUniqueInput): Promise<User | null> {
@@ -29,6 +29,16 @@ export class UserServie {
             orderBy
         });
     }
+
+    // async createUser(data: SignupInput): Promise<User> {
+    //     return this.prisma.user.create({
+    //         data: {
+    //             name: data.name,
+    //             password: data.password,
+    //             email: data.email,
+    //         }
+    //     });
+    // }
 
     async createUser(data: Prisma.UserCreateInput): Promise<User> {
         return this.prisma.user.create({

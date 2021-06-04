@@ -3,7 +3,19 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
   
+  const config = new DocumentBuilder()
+  .setTitle('JUNO DEV')
+  .setDescription('JUNO API description')
+  .setVersion('1.0')
+  .build()
+
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document)
+  // const schema = await buildSchema({
+
+  // })
   // // Validation
   // app.useGlobalPipes(new ValidationPipe());
 
